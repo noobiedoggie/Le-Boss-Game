@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#120a1c" />
+    <title>LE BOSS</title>
+    <style>
+      @font-face {
+        font-family: 'Lilita One';
+        src: url('./fonts/LilitaOne-Regular.ttf') format('truetype');
+        font-display: block;
+      }
+      html, body {
+        margin: 0; padding: 0; width: 100%; height: 100%;
+        background: #120a1c; overflow: hidden;
+        touch-action: none; user-select: none; -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent; overscroll-behavior: none;
+      }
+      #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+      /* Invisible text so the WebView starts loading the font immediately. */
+      #fontwarm { position: absolute; left: -9999px; font-family: 'Lilita One'; }
+    </style>
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <div id="fontwarm">LE BOSS àéèêç</div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
