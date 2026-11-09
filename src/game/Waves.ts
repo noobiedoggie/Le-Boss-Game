@@ -57,7 +57,7 @@ export function planWave(rng: Rng, wave: number, countMul: number, lessons: Less
   }
 
   const sup = superFor(wave);
-  let n = Math.round((4 + wave * 1.15) * countMul);
+  let n = Math.round((4 + wave * 1.45) * countMul);
   if (wave === 1) n = 5;
   if (sup) n = Math.round(n * 0.6);
   const interval = Math.max(0.5, 1.75 - wave * 0.06);

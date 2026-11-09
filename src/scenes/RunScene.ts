@@ -122,13 +122,34 @@ export class RunScene implements Scene {
   // ================================================================ setup
   enter(): void {
     const setup = runSetup(!!this.opts.daily);
-    const seed = this.opts.seed ?? (Math.random() * 2 ** 31) | 0;
+    // Debug/testing hooks: ?debug&wave=10&gold=500&unlockall&boss=dragon&build
+    const q = new URLSearchParams(location.search);
+    const debug = q.has('debug');
+    if (debug) {
+      if (q.has('unlockall')) {
+        setup.unlocked = new Set(['wall', ...TRAP_ORDER, ...MONSTER_ORDER] as BuildId[]);
+        if (q.get('tap')) setup.attacks.tap = q.get('tap') as never;
+        if (q.get('swipe')) setup.attacks.swipe = q.get('swipe') as never;
+        if (q.get('hold')) setup.attacks.hold = q.get('hold') as never;
+      }
+      if (q.get('boss')) setup.bossId = q.get('boss') as never;
+      if (q.get('gold')) setup.startGold = Number(q.get('gold'));
+      if (q.get('rage')) setup.rageStart = Number(q.get('rage'));
+    }
+    const seed = this.opts.seed ?? (debug && q.get('seed') ? Number(q.get('seed')) : (Math.random() * 2 ** 31) | 0);
     this.w = new World({ ...setup, seed, daily: this.opts.daily, endless: this.opts.endless, ev: this.events() });
+    if (debug && q.get('wave')) this.w.wave = Number(q.get('wave'));
     this.goldShown = this.w.gold;
     this.layout();
     meta.startRun();
     this.buildUI();
     toasts.anchor = () => this.w.board.bottomY - 40;
+    if (debug && q.has('build')) {
+      this.w.phase = 'build';
+      this.w.buildTime = 999;
+      this.onPhase('build');
+      return;
+    }
     this.w.startWave();
     if (!store.data.hints.fireball) this.hint = { key: 'fireball', text: t('hint.fireball') };
     this.game.camera.intensity = store.data.settings.shake ? 1 : 0.15;

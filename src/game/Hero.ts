@@ -24,7 +24,7 @@ let NEXT_ID = 1;
 /** Per-wave stat scaling of heroes. */
 export function heroHpScale(wave: number): number {
   const w = wave - 1;
-  return 1 + 0.5 * w + 0.07 * w * w;
+  return 1 + 0.65 * w + 0.1 * w * w;
 }
 
 export class Hero {
@@ -155,7 +155,7 @@ export class Hero {
     this.dmg = dmg;
     this.atkCd = c.atkCd;
     this.range = c.range;
-    this.bounty = Math.max(1, Math.round(bounty * (1 + w.wave * 0.02)));
+    this.bounty = Math.max(1, Math.round(bounty * 0.75 * (1 + w.wave * 0.02)));
     this.scale = scale;
     this.x = x;
     this.y = y;
@@ -175,7 +175,7 @@ export class Hero {
     switch (this.superId) {
       case 'chosen':
         this.plotArmor = true;
-        this.maxHp = this.hp = Math.round(this.maxHp * 6);
+        this.maxHp = this.hp = Math.round(105 * heroHpScale(w.wave) * w.mods.heroHp);
         this.scale = 1.35;
         this.bossDmg = 3;
         this.speed = 0.7 * w.mods.heroSpeed;
@@ -187,7 +187,7 @@ export class Hero {
         break;
       case 'paladin3': {
         this.scale = 1.7;
-        const per = Math.round(this.maxHp * 1.8);
+        const per = Math.round(27 * heroHpScale(w.wave) * w.mods.heroHp);
         this.heads = [0, 1, 2].map(() => ({ hp: per, max: per, alive: true }));
         this.maxHp = this.hp = per * 3;
         this.bossDmg = 4;
@@ -197,7 +197,7 @@ export class Hero {
         break;
       }
       case 'player':
-        this.maxHp = this.hp = Math.round(this.maxHp * 9);
+        this.maxHp = this.hp = Math.round(60 * heroHpScale(w.wave) * w.mods.heroHp);
         this.scale = 1.3;
         this.bossDmg = 5;
         this.speed = 1.25 * w.mods.heroSpeed;

@@ -84,7 +84,7 @@ export class Meta {
 
   /** Souls earned at the end of a run. */
   souls(w: World, won: boolean): number {
-    let s = Math.floor(w.stats.kills / 4) + (w.stats.wavesSurvived) * 4 + (won ? 120 : 0) + Math.floor(w.stats.bestStreak / 2);
+    let s = Math.floor(w.stats.kills / 3) + w.stats.wavesSurvived * 5 + (won ? 150 : 0) + Math.floor(w.stats.bestStreak / 2);
     s = Math.round(s * (1 + store.upg('soulGain') * 0.1));
     if (w.opts.daily) s = Math.round(s * 1.5);
     return Math.max(5, s);
@@ -132,8 +132,8 @@ export function runSetup(daily: boolean): {
   return {
     bossId: daily ? 'demon' : d.selectedBoss,
     attacks: daily ? { tap: 'fireball', swipe: 'claw', hold: 'roar' } : { ...d.attacks },
-    startGold: 100 + (daily ? 0 : store.upg('startGold') * 30),
-    bossHpBonus: daily ? 0 : store.upg('bossHp') * 4,
+    startGold: 100 + (daily ? 0 : store.upg('startGold') * 40),
+    bossHpBonus: daily ? 0 : store.upg('bossHp') * 5,
     rageStart: daily ? 0 : store.upg('rage') * 20,
     rerolls: daily ? 1 : store.upg('pactReroll'),
     unlocked,

@@ -80,6 +80,7 @@ export class ShopScene extends MenuScene {
       // preview
       ctx.save();
       ctx.translate(90, y + 60);
+      ctx.scale(1.3, 1.3);
       this.drawPreview(ctx, it);
       ctx.restore();
       text(ctx, t(it.nameKey), 170, y + 32, { size: 24, align: 'left', color: C.goldHi, maxWidth: 330 });

@@ -101,10 +101,13 @@ export class Button {
         icon(ctx, this.iconName, ix, down + (this.sub ? -6 : 0), this.iconSize, t);
         tx = this.label ? this.iconSize / 2 + 4 : 0;
       }
+      // dark text on light buttons: no heavy outline (readability)
+      const darkText = this.enabled && this.textColor === C.ink;
+      const o = darkText ? { lw: 0, shadow: false } : {};
       if (this.label) {
-        text(ctx, this.label, tx, down + (this.sub ? -9 : 1), { size: this.size, color: this.enabled ? this.textColor : '#b8aec9', maxWidth: this.w - 24 - (this.iconName ? this.iconSize + 8 : 0) });
+        text(ctx, this.label, tx, down + (this.sub ? -9 : 1), { size: this.size, color: this.enabled ? this.textColor : '#b8aec9', maxWidth: this.w - 24 - (this.iconName ? this.iconSize + 8 : 0), ...o });
       }
-      if (this.sub) text(ctx, this.sub, tx, down + this.h * 0.24, { size: this.size * 0.55, color: shade(this.enabled ? this.textColor : '#b8aec9', -0.05), maxWidth: this.w - 20 });
+      if (this.sub) text(ctx, this.sub, tx, down + this.h * 0.24, { size: this.size * 0.55, color: shade(this.enabled ? this.textColor : '#b8aec9', -0.05), maxWidth: this.w - 20, ...o });
     }
     if (this.badge) {
       ctx.save();

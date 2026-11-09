@@ -169,14 +169,14 @@ export class BossSelectScene implements Scene {
     text(ctx, t(`boss.${this.boss}.name`), W / 2, st + 486, { size: 30, color: def.accent });
     textBlock(ctx, t(`boss.${this.boss}.desc`), W / 2, st + 530, 600, { size: 18, lw: 3 });
     icon(ctx, 'heart', 250, st + 572, 22);
-    text(ctx, `${def.hp + store.upg('bossHp') * 4} PV`, 270, st + 573, { size: 18, align: 'left' });
+    text(ctx, `${def.hp + store.upg('bossHp') * 5} PV`, 270, st + 573, { size: 18, align: 'left' });
     icon(ctx, 'rage', 400, st + 572, 22);
     text(ctx, t(`boss.${this.boss}.ult`), 420, st + 573, { size: 18, align: 'left', color: C.lavaHi });
     // slot labels
     let y = st + 655;
     for (const slot of SLOT_ORDER) {
-      icon(ctx, slot, 60, y, 34, this.t);
-      text(ctx, t(slot === 'tap' ? 'hud.tapHold' : slot === 'swipe' ? 'hud.swipe' : 'hud.hold'), 108, y, { size: 18, align: 'left' });
+      icon(ctx, slot, 80, y - 10, 34, this.t);
+      text(ctx, t(slot === 'tap' ? 'hud.tapHold' : slot === 'swipe' ? 'hud.swipe' : 'hud.hold'), 80, y + 24, { size: 16, maxWidth: 140 });
       y += 86;
     }
     this.ui.draw(ctx, this.t);

@@ -66,8 +66,8 @@ export class HallScene extends MenuScene {
         const h = store.data.hall[e.key];
         panel(ctx, x, y, 220, 276, h ? '#2f1d48' : '#1c1129', i + 1);
         const key = ensureHeroSprite(e.look, h ? 'smug' : 'dead');
-        if (h) sprites.draw(ctx, key, x + 110, y + 118, 1.25, 1.25);
-        else sprites.drawTinted(ctx, key, '#0c0614', x + 110, y + 118, 1.25, 1.25);
+        if (h) sprites.draw(ctx, key, x + 110, y + 124, 1.75, 1.75);
+        else sprites.drawTinted(ctx, key, '#0c0614', x + 110, y + 124, 1.75, 1.75);
         text(ctx, h ? e.name : t('hall.unknown'), x + 110, y + 146, { size: 20, color: h ? C.goldHi : '#6a5a80', maxWidth: 200 });
         if (h) {
           text(ctx, t('hall.count', { n: h.count }), x + 110, y + 172, { size: 15, color: '#ff9db0', lw: 3 });

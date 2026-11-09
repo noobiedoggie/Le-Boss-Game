@@ -14,6 +14,12 @@ import { toasts } from './ui/widgets';
  * Boot: load save -> apply settings -> wait for the bundled font -> splash.
  */
 async function boot(): Promise<void> {
+  const params = new URLSearchParams(location.search);
+  if (params.has('icon')) {
+    const { renderIconMode } = await import('./iconMode');
+    renderIconMode(params);
+    return;
+  }
   const canvas = document.getElementById('game') as HTMLCanvasElement;
   const game = new Game(canvas);
   sprites.setResolution(game.scale);

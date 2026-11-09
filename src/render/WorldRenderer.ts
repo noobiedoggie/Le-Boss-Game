@@ -567,7 +567,7 @@ export class WorldRenderer {
       ctx.lineTo(x.x, x.y);
       ctx.stroke();
       ctx.restore();
-      text(ctx, tr('hud.tilesPath', { n: path.length }), b.cx, b.top - 14, { size: 18, color: '#ffe9b0', lw: 4 });
+      text(ctx, tr('hud.tilesPath', { n: path.length }), b.cx, b.top - b.tileH * 1.45 + 2, { size: 18, color: '#ffe9b0', lw: 4 });
     }
     if (o.hoverTile >= 0 && o.hoverId) {
       this.tileHighlight(ctx, b, o.hoverTile, o.hoverOk ? C.uiGood : C.crimsonHi, true);

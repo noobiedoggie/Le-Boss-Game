@@ -110,7 +110,7 @@ export class HubScene implements Scene {
     text(ctx, fmt(store.data.souls), 600, st + 31, { size: 24, color: '#8fe8ff', align: 'left' });
     // boss
     const by = H - sb - 350;
-    const scale = Math.min(0.95, (by - (st + 180)) / 470);
+    const scale = Math.min(1.15, (by - (st + 200)) / 470);
     drawBoss(ctx, store.data.selectedBoss, W / 2, by - 10, scale, {
       t: this.t, mood: this.laughT > 0 ? 'laugh' : 'idle', hurt: 0, lookX: Math.sin(this.t * 0.6) * 0.4, lookY: 0.2, rage: 0.5, charge: 0,
       crown: store.data.cosmetics.crown, skin: skinVariant(store.data.cosmetics.skin),
